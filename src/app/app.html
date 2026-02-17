@@ -1,0 +1,343 @@
+<!-- Navbar -->
+<nav class="navbar">
+  <div class="nav-container">
+    <div class="nav-brand">
+      <div class="brand-icon">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+          <circle cx="16" cy="16" r="14" stroke="white" stroke-width="2"/>
+          <path d="M10 16 L14 20 L22 12" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="16" cy="8" r="2" fill="white"/>
+          <circle cx="24" cy="16" r="2" fill="white"/>
+          <circle cx="16" cy="24" r="2" fill="white"/>
+          <circle cx="8" cy="16" r="2" fill="white"/>
+        </svg>
+      </div>
+      <div class="brand-text">
+        <span class="brand-name">TÜBİTAK</span>
+        <span class="brand-code">2237/A Programı</span>
+      </div>
+    </div>
+
+    <ul class="nav-links">
+      <li><a href="#hero" class="nav-link active">Ana Sayfa</a></li>
+      <li><a href="#about" class="nav-link">Proje Hakkında</a></li>
+      <li><a href="#activities" class="nav-link">Faaliyetler</a></li>
+      <li><a href="#team" class="nav-link">Ekip</a></li>
+      <li><a href="#contact" class="nav-link">İletişim</a></li>
+    </ul>
+
+    <div class="nav-cta">
+      <a href="#contact" class="btn-nav">Başvur</a>
+    </div>
+
+    <button class="hamburger" (click)="toggleMenu()" [class.open]="menuOpen">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <div class="mobile-menu" [class.open]="menuOpen">
+    <a href="#hero" class="mobile-link" (click)="closeMenu()">Ana Sayfa</a>
+    <a href="#about" class="mobile-link" (click)="closeMenu()">Proje Hakkında</a>
+    <a href="#activities" class="mobile-link" (click)="closeMenu()">Faaliyetler</a>
+    <a href="#team" class="mobile-link" (click)="closeMenu()">Ekip</a>
+    <a href="#contact" class="mobile-link" (click)="closeMenu()">İletişim</a>
+  </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero" id="hero">
+  <div class="hero-bg-pattern"></div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span class="badge-dot"></span>
+      TÜBİTAK 2237/A · Yaşam Boyu Öğrenme Desteği
+    </div>
+    <h1 class="hero-title">
+      Yaşam Boyu<br>
+      <span class="title-highlight">Destek Projesi</span>
+    </h1>
+    <p class="hero-subtitle">
+      Bilgiye erişimi kolaylaştırmak, bireylerin sürekli gelişimini desteklemek ve toplumsal refahı artırmak amacıyla yürütülen kapsamlı bir TÜBİTAK projesi.
+    </p>
+    <div class="hero-meta">
+      <div class="meta-item">
+        <span class="meta-label">Proje Yürütücüsü</span>
+        <span class="meta-value">Çağatay Yöndem</span>
+      </div>
+      <div class="meta-divider"></div>
+      <div class="meta-item">
+        <span class="meta-label">Program</span>
+        <span class="meta-value">2237/A</span>
+      </div>
+      <div class="meta-divider"></div>
+      <div class="meta-item">
+        <span class="meta-label">Durum</span>
+        <span class="meta-value status-active">
+          <span class="status-dot"></span>
+          Devam Ediyor
+        </span>
+      </div>
+    </div>
+    <div class="hero-actions">
+      <a href="#about" class="btn-primary">Projeyi Keşfet</a>
+      <a href="#contact" class="btn-secondary">İletişime Geç</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="visual-card main-card">
+      <div class="card-icon">🎓</div>
+      <h3>Yaşam Boyu Öğrenme</h3>
+      <p>Her yaşta eğitim hakkı ve bilgiye erişim fırsatı</p>
+    </div>
+    <div class="visual-card side-card card-top">
+      <div class="card-icon">🔬</div>
+      <span>Bilimsel Yöntem</span>
+    </div>
+    <div class="visual-card side-card card-bottom">
+      <div class="card-icon">🤝</div>
+      <span>Toplumsal Katkı</span>
+    </div>
+    <div class="floating-stat stat1">
+      <span class="stat-num">2237A</span>
+      <span class="stat-label">Program Kodu</span>
+    </div>
+    <div class="floating-stat stat2">
+      <span class="stat-num">A</span>
+      <span class="stat-label">Alt Başlık</span>
+    </div>
+  </div>
+</section>
+
+<!-- About Section -->
+<section class="about" id="about">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Proje Hakkında</span>
+      <h2>Neden Bu Proje?</h2>
+      <p>TÜBİTAK 2237/A programı kapsamında yürütülen bu proje, yaşam boyu öğrenme ilkesini merkeze alarak bireylerin bilişsel gelişimini desteklemeyi amaçlamaktadır.</p>
+    </div>
+
+    <div class="about-grid">
+      <div class="about-card">
+        <div class="about-icon">📚</div>
+        <h3>Eğitim Erişimi</h3>
+        <p>Farklı yaş ve kesimlerden bireylerin kaliteli eğitime erişimini kolaylaştıran mekanizmalar geliştiriyoruz.</p>
+      </div>
+      <div class="about-card">
+        <div class="about-icon">💡</div>
+        <h3>Yenilikçi Yaklaşım</h3>
+        <p>Modern pedagoji yöntemleri ve teknolojik araçları bir araya getirerek öğrenme deneyimini zenginleştiriyoruz.</p>
+      </div>
+      <div class="about-card">
+        <div class="about-icon">🌱</div>
+        <h3>Sürdürülebilir Gelişim</h3>
+        <p>Bireyden topluma uzanan sürdürülebilir bir gelişim modeli kurguluyor, uzun vadeli etkiler yaratıyoruz.</p>
+      </div>
+      <div class="about-card">
+        <div class="about-icon">📊</div>
+        <h3>Ölçülebilir Sonuçlar</h3>
+        <p>Her aşamada ölçülebilir çıktılar belirleyerek projenin bilimsel geçerliliğini ve etkinliğini güvence altına alıyoruz.</p>
+      </div>
+    </div>
+
+    <div class="about-highlight">
+      <div class="highlight-text">
+        <h3>Proje Kapsamı</h3>
+        <p>Bu proje; bireylerin yaşam boyu öğrenme süreçlerini desteklemek için tasarlanmış etkinlikler, seminerler, çalıştaylar ve kaynaklar sunmaktadır. TÜBİTAK 2237/A programının finansal desteğiyle hayata geçirilen bu girişim, Türkiye'nin bilim ve eğitim vizyonuna katkı sağlamayı hedeflemektedir.</p>
+        <a href="#activities" class="btn-primary">Faaliyetleri Gör</a>
+      </div>
+      <div class="highlight-stats">
+        <div class="h-stat">
+          <span class="h-stat-num">2237/A</span>
+          <span class="h-stat-label">TÜBİTAK Programı</span>
+        </div>
+        <div class="h-stat">
+          <span class="h-stat-num">∞</span>
+          <span class="h-stat-label">Yaşam Boyu Destek</span>
+        </div>
+        <div class="h-stat">
+          <span class="h-stat-num">🇹🇷</span>
+          <span class="h-stat-label">Ulusal Proje</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Activities Section -->
+<section class="activities" id="activities">
+  <div class="container">
+    <div class="section-header light">
+      <span class="section-tag">Faaliyetler</span>
+      <h2>Proje Etkinlikleri</h2>
+      <p>Yaşam boyu öğrenme hedeflerimiz doğrultusunda düzenlenen etkinlik ve çalışmalar</p>
+    </div>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <span class="timeline-tag">Seminer</span>
+          <h4>Açılış Semineri</h4>
+          <p>Projenin hedefleri, kapsamı ve beklenen çıktıların katılımcılara sunulduğu açılış etkinliği.</p>
+          <span class="timeline-date">Yakında Duyurulacak</span>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <span class="timeline-tag">Çalıştay</span>
+          <h4>Uygulama Çalıştayları</h4>
+          <p>Katılımcıların aktif olarak rol aldığı, uygulamalı öğrenme becerilerini geliştirdiği interaktif çalıştaylar.</p>
+          <span class="timeline-date">Yakında Duyurulacak</span>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <span class="timeline-tag">Araştırma</span>
+          <h4>Veri Toplama ve Analiz</h4>
+          <p>Projenin bilimsel boyutunu oluşturan araştırma süreçleri ve bulgularının raporlanması.</p>
+          <span class="timeline-date">Yakında Duyurulacak</span>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <span class="timeline-tag">Kapanış</span>
+          <h4>Sonuç ve Değerlendirme</h4>
+          <p>Proje çıktılarının değerlendirildiği, önerilerin tartışıldığı kapanış etkinliği ve raporlama.</p>
+          <span class="timeline-date">Yakında Duyurulacak</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Team Section -->
+<section class="team" id="team">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Ekip</span>
+      <h2>Proje Ekibi</h2>
+      <p>Bu projeyi hayata geçiren değerli ekip üyelerimiz</p>
+    </div>
+
+    <div class="team-grid">
+      <div class="team-card featured">
+        <div class="team-avatar">ÇY</div>
+        <div class="team-info">
+          <h3>Çağatay Yöndem</h3>
+          <span class="team-role">Proje Yürütücüsü</span>
+          <p>TÜBİTAK 2237/A Yaşam Boyu Destek Projesi'nin yürütücüsü olarak, projenin tüm aşamalarını koordine etmektedir.</p>
+          <div class="team-badge">
+            <span>🏛️ Proje Yürütücüsü</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="team-placeholder">
+        <div class="placeholder-icon">+</div>
+        <p>Ekip üyeleri yakında eklenecek</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section class="contact" id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <span class="section-tag">İletişim</span>
+        <h2>Bizimle İletişime Geçin</h2>
+        <p>Proje hakkında sorularınız, işbirliği teklifleriniz veya başvuru süreçleri için bizimle iletişime geçebilirsiniz.</p>
+
+        <div class="contact-items">
+          <div class="contact-item">
+            <span class="contact-icon">📧</span>
+            <div>
+              <span class="contact-label">E-posta</span>
+              <span class="contact-value">iletisim&#64;proje.tubitak.gov.tr</span>
+            </div>
+          </div>
+          <div class="contact-item">
+            <span class="contact-icon">🏛️</span>
+            <div>
+              <span class="contact-label">Kurum</span>
+              <span class="contact-value">TÜBİTAK Destekli Proje</span>
+            </div>
+          </div>
+          <div class="contact-item">
+            <span class="contact-icon">📋</span>
+            <div>
+              <span class="contact-label">Program</span>
+              <span class="contact-value">2237/A Yaşam Boyu Destek</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <form class="contact-form" (submit)="onSubmit($event)">
+        <div class="form-group">
+          <label>Ad Soyad</label>
+          <input type="text" placeholder="Adınız ve soyadınız" [(ngModel)]="formData.name" name="name"/>
+        </div>
+        <div class="form-group">
+          <label>E-posta</label>
+          <input type="email" placeholder="E-posta adresiniz" [(ngModel)]="formData.email" name="email"/>
+        </div>
+        <div class="form-group">
+          <label>Konu</label>
+          <select [(ngModel)]="formData.subject" name="subject">
+            <option value="">Konu seçin...</option>
+            <option>Proje Hakkında Bilgi</option>
+            <option>İşbirliği Teklifi</option>
+            <option>Başvuru Süreci</option>
+            <option>Diğer</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Mesajınız</label>
+          <textarea placeholder="Mesajınızı buraya yazın..." rows="4" [(ngModel)]="formData.message" name="message"></textarea>
+        </div>
+        <button type="submit" class="btn-primary full-width">
+          Mesaj Gönder →
+        </button>
+        <div class="form-success" *ngIf="submitted">
+          ✅ Mesajınız alındı! En kısa sürede dönüş yapacağız.
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="brand-icon small">
+          <svg width="24" height="24" viewBox="0 0 32 32" fill="none">
+            <circle cx="16" cy="16" r="14" stroke="white" stroke-width="2"/>
+            <path d="M10 16 L14 20 L22 12" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div>
+          <span class="footer-brand-name">TÜBİTAK 2237/A</span>
+          <span class="footer-brand-sub">Yaşam Boyu Destek Projesi</span>
+        </div>
+      </div>
+      <div class="footer-links">
+        <a href="#about">Proje Hakkında</a>
+        <a href="#activities">Faaliyetler</a>
+        <a href="#team">Ekip</a>
+        <a href="#contact">İletişim</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Çağatay Yöndem · TÜBİTAK 2237/A Yaşam Boyu Destek Projesi</p>
+      <p class="tubitak-note">Bu proje TÜBİTAK tarafından desteklenmektedir.</p>
+    </div>
+  </div>
+</footer>
