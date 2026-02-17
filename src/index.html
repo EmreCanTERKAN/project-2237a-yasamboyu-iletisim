@@ -1,13 +1,1500 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="tr">
 <head>
-  <meta charset="utf-8">
-  <title>Project2237aYasamboyuIletisim</title>
-  <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>TÜBİTAK 2237/A — Yaşam Boyu Destek Projesi | Çağatay Yöndem</title>
+<meta name="description" content="TÜBİTAK 2237/A Yaşam Boyu Öğrenme Destek Projesi. Bireylerin bilişsel gelişimini destekleyen bilimsel proje."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+/* ═══════════════════════════════════════════
+   DESIGN TOKENS
+═══════════════════════════════════════════ */
+:root {
+  --g50:#f0fdf4;--g100:#dcfce7;--g200:#bbf7d0;--g300:#86efac;
+  --g400:#4ade80;--g500:#22c55e;--g600:#16a34a;--g700:#15803d;
+  --g800:#166534;--g900:#14532d;--g950:#052e16;
+
+  --slate50:#f8fafc;--slate100:#f1f5f9;--slate200:#e2e8f0;
+  --slate600:#475569;--slate700:#334155;--slate800:#1e293b;--slate900:#0f172a;
+
+  --accent:#f59e0b;
+  --font-display:'DM Serif Display',Georgia,serif;
+  --font-body:'DM Sans',system-ui,sans-serif;
+
+  --nav-h:72px;
+  --r-sm:8px;--r-md:16px;--r-lg:24px;--r-xl:36px;--r-2xl:48px;
+  --sh-sm:0 1px 3px rgba(0,0,0,.06);
+  --sh-md:0 4px 20px rgba(0,0,0,.08);
+  --sh-lg:0 12px 48px rgba(0,0,0,.12);
+  --sh-green:0 8px 32px rgba(22,163,74,.25);
+}
+
+/* ═══════════════════════════════════════════
+   RESET & BASE
+═══════════════════════════════════════════ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:var(--nav-h)}
+body{font-family:var(--font-body);background:#fff;color:var(--slate700);line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
+button{font-family:var(--font-body);cursor:pointer;border:none;background:none}
+
+.container{max-width:1200px;margin:0 auto;padding:0 clamp(20px,5vw,48px)}
+
+/* ═══════════════════════════════════════════
+   NAVBAR
+═══════════════════════════════════════════ */
+.navbar{
+  position:fixed;top:0;left:0;right:0;z-index:999;
+  height:var(--nav-h);
+  background:rgba(21,128,61,.96);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(255,255,255,.08);
+  transition:box-shadow .3s;
+}
+.navbar.scrolled{box-shadow:0 2px 24px rgba(21,128,61,.35)}
+
+.nav-inner{
+  max-width:1200px;margin:0 auto;
+  padding:0 clamp(20px,5vw,48px);
+  height:100%;
+  display:flex;align-items:center;gap:clamp(16px,3vw,40px);
+}
+
+/* Logo */
+.nav-logo{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.logo-mark{
+  width:38px;height:38px;
+  background:rgba(255,255,255,.15);
+  border:1px solid rgba(255,255,255,.25);
+  border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.logo-text{display:flex;flex-direction:column;line-height:1.15}
+.logo-primary{font-weight:700;font-size:.95rem;color:#fff;letter-spacing:.05em}
+.logo-sub{font-size:.65rem;color:rgba(255,255,255,.65);letter-spacing:.08em;font-weight:500}
+
+/* Links */
+.nav-links{display:flex;align-items:center;gap:2px;list-style:none;margin-left:auto}
+.nav-link{
+  padding:7px 13px;border-radius:30px;
+  font-size:.85rem;font-weight:500;
+  color:rgba(255,255,255,.8);
+  transition:all .2s;
+  white-space:nowrap;
+}
+.nav-link:hover,.nav-link.active{background:rgba(255,255,255,.15);color:#fff}
+
+/* CTA */
+.nav-cta{
+  display:flex;align-items:center;gap:10px;flex-shrink:0;
+}
+.btn-wa{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:8px 16px;
+  background:#25d366;
+  color:#fff;border-radius:30px;
+  font-size:.82rem;font-weight:700;
+  transition:all .2s;
+  white-space:nowrap;
+}
+.btn-wa:hover{background:#1fbe5a;transform:translateY(-1px);box-shadow:0 4px 12px rgba(37,211,102,.4)}
+.btn-wa svg{flex-shrink:0}
+
+.btn-apply{
+  display:inline-block;
+  padding:8px 18px;
+  background:#fff;color:var(--g700);
+  border-radius:30px;font-size:.82rem;font-weight:700;
+  transition:all .2s;white-space:nowrap;
+}
+.btn-apply:hover{transform:translateY(-1px);box-shadow:var(--sh-md)}
+
+/* Hamburger */
+.hamburger{
+  display:none;flex-direction:column;gap:5px;
+  padding:6px;margin-left:auto;
+}
+.hamburger span{
+  display:block;width:22px;height:2px;
+  background:#fff;border-radius:2px;
+  transition:all .3s;
+}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* Mobile menu */
+.mobile-drawer{
+  position:fixed;top:var(--nav-h);left:0;right:0;bottom:0;
+  background:var(--g800);
+  z-index:998;
+  display:flex;flex-direction:column;
+  padding:32px 24px;
+  gap:4px;
+  transform:translateX(100%);
+  transition:transform .35s cubic-bezier(.4,0,.2,1);
+}
+.mobile-drawer.open{transform:translateX(0)}
+.mobile-nav-link{
+  padding:14px 18px;
+  color:rgba(255,255,255,.85);
+  font-size:1.05rem;font-weight:500;
+  border-radius:var(--r-md);
+  transition:background .2s;
+}
+.mobile-nav-link:hover{background:rgba(255,255,255,.08);color:#fff}
+.mobile-drawer-ctas{display:flex;flex-direction:column;gap:10px;margin-top:24px;padding-top:24px;border-top:1px solid rgba(255,255,255,.1)}
+.btn-wa-mobile{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  padding:14px;background:#25d366;color:#fff;
+  border-radius:var(--r-md);font-weight:700;font-size:1rem;
+}
+.btn-apply-mobile{
+  display:flex;align-items:center;justify-content:center;
+  padding:14px;background:rgba(255,255,255,.12);color:#fff;
+  border-radius:var(--r-md);font-weight:600;font-size:1rem;
+  border:1px solid rgba(255,255,255,.2);
+}
+
+/* ═══════════════════════════════════════════
+   BUTTONS (global)
+═══════════════════════════════════════════ */
+.btn-primary{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:14px 28px;background:var(--g600);color:#fff;
+  border-radius:40px;font-weight:700;font-size:.92rem;
+  transition:all .25s;border:none;cursor:pointer;
+}
+.btn-primary:hover{background:var(--g700);transform:translateY(-2px);box-shadow:var(--sh-green)}
+
+.btn-outline{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:13px 28px;background:transparent;color:var(--g700);
+  border:2px solid var(--g400);border-radius:40px;
+  font-weight:600;font-size:.92rem;transition:all .25s;
+}
+.btn-outline:hover{background:var(--g50);transform:translateY(-2px)}
+
+/* ═══════════════════════════════════════════
+   SECTION HELPERS
+═══════════════════════════════════════════ */
+.sec-tag{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:5px 14px;background:var(--g100);color:var(--g700);
+  border-radius:30px;font-size:.72rem;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;
+  border:1px solid var(--g200);
+}
+.sec-tag.light{background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.2)}
+.sec-tag::before{content:'';width:6px;height:6px;background:currentColor;border-radius:50%;opacity:.6}
+
+.sec-head{text-align:center;margin-bottom:clamp(40px,6vw,64px)}
+.sec-head h2{
+  font-family:var(--font-display);
+  font-size:clamp(2rem,4vw,3rem);
+  color:var(--slate900);
+  margin:12px 0 16px;line-height:1.15;
+}
+.sec-head.light h2{color:#fff}
+.sec-head p{max-width:560px;margin:0 auto;color:var(--slate600);font-size:.97rem;line-height:1.75}
+.sec-head.light p{color:rgba(255,255,255,.72)}
+
+/* ═══════════════════════════════════════════
+   HERO
+═══════════════════════════════════════════ */
+.hero{
+  min-height:100svh;
+  padding:calc(var(--nav-h) + clamp(40px,8vw,80px)) 0 clamp(60px,8vw,100px);
+  background:linear-gradient(150deg, var(--g50) 0%, #fff 55%, var(--g100) 100%);
+  position:relative;overflow:hidden;
+  display:flex;align-items:center;
+}
+
+/* Subtle grid texture */
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(34,197,94,.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(34,197,94,.04) 1px, transparent 1px);
+  background-size:48px 48px;
+  mask-image:radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
+}
+.hero::after{
+  content:'';position:absolute;
+  top:-200px;right:-200px;
+  width:600px;height:600px;
+  background:radial-gradient(circle, rgba(34,197,94,.12) 0%, transparent 70%);
+  border-radius:50%;pointer-events:none;
+}
+
+.hero-inner{
+  position:relative;z-index:1;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  align-items:center;
+  gap:clamp(40px,6vw,80px);
+}
+
+/* Left */
+.hero-kicker{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:6px 14px;
+  background:var(--g100);border:1px solid var(--g200);border-radius:30px;
+  font-size:.78rem;font-weight:700;color:var(--g700);
+  letter-spacing:.06em;margin-bottom:24px;
+}
+.kicker-dot{width:8px;height:8px;background:var(--g500);border-radius:50%;animation:blink 2s ease infinite}
+@keyframes blink{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.3)}}
+
+.hero-title{
+  font-family:var(--font-display);
+  font-size:clamp(2.6rem,5.5vw,4.4rem);
+  color:var(--slate900);
+  line-height:1.08;margin-bottom:20px;
+}
+.hero-title em{
+  font-style:italic;color:var(--g600);
+  position:relative;display:inline-block;
+}
+.hero-title em::after{
+  content:'';position:absolute;
+  left:0;bottom:4px;right:0;height:4px;
+  background:linear-gradient(90deg,var(--g400),transparent);
+  border-radius:2px;
+}
+
+.hero-desc{
+  font-size:1.05rem;color:var(--slate600);
+  max-width:500px;line-height:1.8;margin-bottom:28px;
+}
+
+.hero-meta-row{
+  display:flex;flex-wrap:wrap;align-items:center;gap:16px;
+  padding:20px 24px;
+  background:#fff;
+  border:1px solid var(--g200);
+  border-radius:var(--r-lg);
+  margin-bottom:32px;
+  box-shadow:var(--sh-sm);
+}
+.hero-meta-item{display:flex;flex-direction:column;gap:2px}
+.hero-meta-label{font-size:.68rem;font-weight:700;color:var(--slate600);letter-spacing:.1em;text-transform:uppercase}
+.hero-meta-value{font-size:.9rem;font-weight:600;color:var(--slate900)}
+.hero-meta-sep{width:1px;height:32px;background:var(--slate200);flex-shrink:0}
+.meta-live{display:flex;align-items:center;gap:6px;color:var(--g600);font-weight:600;font-size:.9rem}
+.meta-live-dot{width:8px;height:8px;background:var(--g500);border-radius:50%;box-shadow:0 0 0 3px rgba(34,197,94,.2);animation:blink 2s ease infinite}
+
+.hero-ctas{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.cta-wa{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:14px 24px;background:#25d366;color:#fff;
+  border-radius:40px;font-weight:700;font-size:.92rem;
+  transition:all .25s;
+}
+.cta-wa:hover{background:#1fbe5a;transform:translateY(-2px);box-shadow:0 8px 24px rgba(37,211,102,.4)}
+
+/* Right – visual stack */
+.hero-right{position:relative;height:520px}
+
+.hero-card{
+  position:absolute;
+  background:#fff;border-radius:var(--r-lg);
+  border:1px solid var(--g100);
+  box-shadow:var(--sh-lg);
+  transition:transform .4s ease;
+}
+.hero-card:hover{transform:translateY(-6px) !important}
+
+.card-main{
+  width:260px;
+  top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  padding:32px 28px;
+  text-align:center;
+  z-index:3;
+  border-color:var(--g200);
+}
+.card-main:hover{transform:translate(-50%,calc(-50% - 6px)) !important}
+.card-main-icon{font-size:3rem;margin-bottom:14px}
+.card-main h3{font-size:1rem;font-weight:700;color:var(--slate900);margin-bottom:8px}
+.card-main p{font-size:.8rem;color:var(--slate600);line-height:1.6}
+
+.card-float{
+  padding:14px 18px;
+  display:flex;align-items:center;gap:10px;
+  font-size:.83rem;font-weight:600;color:var(--slate800);
+  white-space:nowrap;z-index:2;
+}
+.cf1{top:60px;right:10px;animation:floatY 4s ease-in-out infinite}
+.cf2{bottom:80px;left:0px;animation:floatY 4s ease-in-out infinite .6s}
+.cf3{top:200px;left:-10px;animation:floatY 4s ease-in-out infinite 1.2s}
+
+@keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+
+.stat-pill{
+  position:absolute;
+  background:linear-gradient(135deg,var(--g600),var(--g700));
+  color:#fff;border-radius:var(--r-md);
+  padding:14px 20px;
+  display:flex;flex-direction:column;align-items:center;
+  box-shadow:var(--sh-green);z-index:4;
+}
+.sp1{top:16px;left:20px;animation:floatY 4s ease-in-out infinite .3s}
+.sp2{bottom:40px;right:0;animation:floatY 4s ease-in-out infinite .9s}
+.stat-pill .num{font-size:1.4rem;font-weight:800;line-height:1}
+.stat-pill .lbl{font-size:.62rem;letter-spacing:.06em;opacity:.75;margin-top:3px;white-space:nowrap}
+
+/* ═══════════════════════════════════════════
+   STATS STRIP
+═══════════════════════════════════════════ */
+.stats-strip{
+  background:var(--g700);
+  padding:clamp(32px,5vw,48px) 0;
+}
+.stats-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:0;
+  text-align:center;
+}
+.stat-item{
+  padding:20px 16px;
+  border-right:1px solid rgba(255,255,255,.1);
+  animation:countUp 2s ease forwards;
+}
+.stat-item:last-child{border-right:none}
+.stat-num{
+  font-family:var(--font-display);
+  font-size:clamp(2rem,4vw,3rem);
+  color:#fff;line-height:1;margin-bottom:6px;
+  display:block;
+}
+.stat-lbl{font-size:.8rem;color:rgba(255,255,255,.65);font-weight:500}
+
+/* ═══════════════════════════════════════════
+   ABOUT
+═══════════════════════════════════════════ */
+.about{padding:clamp(64px,10vw,120px) 0;background:#fff}
+
+.about-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:24px;
+  margin-bottom:56px;
+}
+.about-card{
+  padding:clamp(24px,3vw,36px);
+  background:var(--g50);border:1px solid var(--g100);
+  border-radius:var(--r-lg);
+  transition:all .3s;
+  position:relative;overflow:hidden;
+}
+.about-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--g400),var(--g600));
+  transform:scaleX(0);transform-origin:left;transition:transform .3s;
+}
+.about-card:hover{transform:translateY(-4px);box-shadow:var(--sh-md)}
+.about-card:hover::before{transform:scaleX(1)}
+.about-icon{font-size:2.2rem;margin-bottom:16px}
+.about-card h3{font-size:1.05rem;font-weight:700;color:var(--slate900);margin-bottom:10px}
+.about-card p{font-size:.88rem;color:var(--slate600);line-height:1.7}
+
+/* Impact banner */
+.impact-banner{
+  display:grid;grid-template-columns:1fr auto;
+  gap:clamp(24px,4vw,64px);align-items:center;
+  padding:clamp(36px,5vw,56px);
+  background:linear-gradient(135deg,var(--g800) 0%,var(--g700) 60%,var(--g600) 100%);
+  border-radius:var(--r-xl);color:#fff;
+  position:relative;overflow:hidden;
+}
+.impact-banner::after{
+  content:'2237';position:absolute;
+  right:-20px;top:50%;transform:translateY(-50%);
+  font-family:var(--font-display);font-size:10rem;
+  font-weight:700;color:rgba(255,255,255,.04);
+  line-height:1;pointer-events:none;letter-spacing:-.05em;
+}
+.impact-text h3{font-family:var(--font-display);font-size:clamp(1.5rem,3vw,2rem);margin-bottom:14px;line-height:1.2}
+.impact-text p{font-size:.93rem;opacity:.82;line-height:1.75;max-width:520px;margin-bottom:28px}
+.impact-text .btn-primary{background:#fff;color:var(--g700)}
+.impact-text .btn-primary:hover{background:var(--g50);box-shadow:var(--sh-md)}
+.impact-stats{display:flex;flex-direction:column;gap:20px;flex-shrink:0}
+.i-stat{text-align:center;padding:16px 24px;background:rgba(255,255,255,.08);border-radius:var(--r-md);border:1px solid rgba(255,255,255,.12)}
+.i-stat-num{display:block;font-family:var(--font-display);font-size:2rem;line-height:1;margin-bottom:4px}
+.i-stat-lbl{font-size:.7rem;letter-spacing:.06em;opacity:.65;white-space:nowrap}
+
+/* ═══════════════════════════════════════════
+   ACTIVITIES / TIMELINE
+═══════════════════════════════════════════ */
+.activities{
+  padding:clamp(64px,10vw,120px) 0;
+  background:linear-gradient(160deg,var(--g800) 0%,var(--g700) 100%);
+  position:relative;overflow:hidden;
+}
+.activities::before{
+  content:'';position:absolute;inset:0;
+  background:repeating-linear-gradient(-45deg,transparent,transparent 60px,rgba(255,255,255,.015) 60px,rgba(255,255,255,.015) 61px);
+}
+
+.acts-grid{
+  display:grid;grid-template-columns:repeat(2,1fr);
+  gap:20px;position:relative;z-index:1;
+}
+.act-card{
+  background:rgba(255,255,255,.07);
+  backdrop-filter:blur(8px);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:var(--r-lg);
+  padding:28px;
+  transition:all .3s;
+}
+.act-card:hover{background:rgba(255,255,255,.12);transform:translateY(-4px)}
+.act-step{
+  display:inline-block;
+  width:32px;height:32px;
+  background:rgba(255,255,255,.15);
+  border-radius:50%;
+  text-align:center;line-height:32px;
+  font-size:.78rem;font-weight:800;color:#fff;
+  margin-bottom:16px;
+}
+.act-tag{
+  display:inline-block;padding:3px 10px;
+  background:rgba(255,255,255,.12);color:rgba(255,255,255,.85);
+  border-radius:20px;font-size:.68rem;font-weight:700;
+  letter-spacing:.08em;text-transform:uppercase;
+  margin-bottom:12px;
+}
+.act-card h4{font-size:1.05rem;font-weight:700;color:#fff;margin-bottom:8px}
+.act-card p{font-size:.84rem;color:rgba(255,255,255,.7);line-height:1.65;margin-bottom:16px}
+.act-date{display:flex;align-items:center;gap:6px;font-size:.75rem;color:var(--g300);font-weight:600}
+.act-date::before{content:'';width:5px;height:5px;background:var(--g300);border-radius:50%}
+
+/* ═══════════════════════════════════════════
+   TEAM
+═══════════════════════════════════════════ */
+.team{padding:clamp(64px,10vw,120px) 0;background:var(--slate50)}
+
+.team-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:24px;
+  max-width:960px;margin:0 auto;
+}
+.team-card{
+  background:#fff;border-radius:var(--r-xl);
+  border:1px solid var(--slate200);
+  padding:36px 28px;text-align:center;
+  transition:all .3s;
+  position:relative;overflow:hidden;
+}
+.team-card.lead{
+  border-color:var(--g300);
+  box-shadow:0 0 0 3px var(--g100), var(--sh-md);
+  grid-column:span 1;
+}
+.team-card:hover{transform:translateY(-6px);box-shadow:var(--sh-lg)}
+
+.team-avatar-wrap{position:relative;display:inline-block;margin-bottom:18px}
+.team-avatar{
+  width:80px;height:80px;
+  background:linear-gradient(135deg,var(--g400),var(--g700));
+  border-radius:var(--r-lg);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:800;font-size:1.3rem;color:#fff;
+  letter-spacing:.02em;
+}
+.lead-badge{
+  position:absolute;bottom:-6px;right:-6px;
+  background:var(--accent);color:#fff;
+  border-radius:8px;padding:2px 7px;
+  font-size:.6rem;font-weight:800;letter-spacing:.06em;
+  text-transform:uppercase;border:2px solid #fff;
+}
+.team-name{font-weight:700;font-size:1rem;color:var(--slate900);margin-bottom:4px}
+.team-role{font-size:.78rem;font-weight:600;color:var(--g600);letter-spacing:.05em;text-transform:uppercase;margin-bottom:12px;display:block}
+.team-bio{font-size:.83rem;color:var(--slate600);line-height:1.65}
+
+.team-add{
+  background:var(--slate50);border:2px dashed var(--slate200);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;
+  color:var(--slate600);
+}
+.team-add-icon{
+  width:52px;height:52px;
+  background:var(--slate100);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.5rem;color:var(--slate600);
+}
+.team-add p{font-size:.84rem;font-weight:500}
+
+/* ═══════════════════════════════════════════
+   FAQ
+═══════════════════════════════════════════ */
+.faq{padding:clamp(64px,10vw,120px) 0;background:#fff}
+.faq-list{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
+.faq-item{
+  border:1px solid var(--slate200);border-radius:var(--r-md);
+  overflow:hidden;transition:border-color .2s;
+}
+.faq-item.open{border-color:var(--g300)}
+.faq-q{
+  width:100%;text-align:left;padding:20px 24px;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  font-weight:600;font-size:.95rem;color:var(--slate800);
+  background:#fff;cursor:pointer;transition:background .2s;
+}
+.faq-q:hover{background:var(--g50)}
+.faq-icon{
+  width:26px;height:26px;flex-shrink:0;
+  background:var(--g100);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--g600);font-size:.9rem;font-weight:700;
+  transition:transform .3s;
+}
+.faq-item.open .faq-icon{transform:rotate(45deg);background:var(--g600);color:#fff}
+.faq-a{
+  max-height:0;overflow:hidden;
+  transition:max-height .35s ease,padding .35s;
+  background:var(--g50);
+}
+.faq-item.open .faq-a{max-height:200px}
+.faq-a-inner{padding:16px 24px 20px;font-size:.88rem;color:var(--slate600);line-height:1.75}
+
+/* ═══════════════════════════════════════════
+   CONTACT
+═══════════════════════════════════════════ */
+.contact{padding:clamp(64px,10vw,120px) 0;background:var(--g50)}
+.contact-grid{
+  display:grid;grid-template-columns:1fr 1.2fr;
+  gap:clamp(32px,6vw,80px);align-items:start;
+}
+
+.contact-info .sec-tag{margin-bottom:16px}
+.contact-info h2{font-family:var(--font-display);font-size:clamp(2rem,4vw,2.8rem);color:var(--slate900);margin-bottom:16px;line-height:1.15}
+.contact-info > p{color:var(--slate600);font-size:.95rem;margin-bottom:36px;line-height:1.75}
+
+/* WhatsApp big button */
+.wa-banner{
+  display:flex;align-items:center;gap:16px;
+  padding:20px 24px;
+  background:linear-gradient(135deg,#25d366,#128c7e);
+  border-radius:var(--r-lg);color:#fff;
+  margin-bottom:24px;
+  transition:all .3s;text-decoration:none;
+}
+.wa-banner:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(37,211,102,.35)}
+.wa-banner-icon{font-size:2rem;flex-shrink:0}
+.wa-banner-text{}
+.wa-banner-text strong{display:block;font-size:1rem;font-weight:700;margin-bottom:2px}
+.wa-banner-text span{font-size:.82rem;opacity:.85}
+.wa-banner-arrow{margin-left:auto;font-size:1.3rem;opacity:.7}
+
+.contact-channels{display:flex;flex-direction:column;gap:12px}
+.channel{
+  display:flex;align-items:center;gap:14px;
+  padding:16px 20px;background:#fff;
+  border:1px solid var(--g200);border-radius:var(--r-md);
+  transition:all .2s;
+}
+.channel:hover{border-color:var(--g400);transform:translateX(4px)}
+.channel-icon{
+  width:42px;height:42px;flex-shrink:0;
+  background:var(--g100);border-radius:var(--r-sm);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.2rem;
+}
+.channel-label{font-size:.7rem;font-weight:700;color:var(--slate600);letter-spacing:.08em;text-transform:uppercase;margin-bottom:2px;display:block}
+.channel-value{font-weight:600;color:var(--slate900);font-size:.88rem}
+
+/* Form */
+.contact-form-wrap{
+  background:#fff;border-radius:var(--r-xl);
+  border:1px solid var(--g200);
+  padding:clamp(28px,4vw,44px);
+  box-shadow:var(--sh-md);
+}
+.contact-form-wrap h3{font-size:1.2rem;font-weight:700;color:var(--slate900);margin-bottom:6px}
+.contact-form-wrap > p{font-size:.84rem;color:var(--slate600);margin-bottom:28px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.form-group{display:flex;flex-direction:column;gap:6px;margin-bottom:16px}
+.form-group label{font-size:.78rem;font-weight:700;color:var(--slate700);letter-spacing:.04em}
+.form-group input,.form-group select,.form-group textarea{
+  padding:12px 16px;
+  background:var(--g50);
+  border:1.5px solid var(--g200);
+  border-radius:var(--r-sm);
+  font-family:var(--font-body);font-size:.9rem;color:var(--slate900);
+  outline:none;transition:all .2s;resize:vertical;
+}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{
+  border-color:var(--g500);background:#fff;
+  box-shadow:0 0 0 3px rgba(34,197,94,.1);
+}
+.form-group input::placeholder,.form-group textarea::placeholder{color:var(--slate600)}
+.form-submit{width:100%;margin-top:8px}
+.form-note{font-size:.75rem;color:var(--slate600);text-align:center;margin-top:12px}
+.success-box{
+  padding:16px;background:var(--g100);border:1px solid var(--g300);
+  border-radius:var(--r-sm);font-size:.88rem;font-weight:600;
+  color:var(--g700);text-align:center;margin-top:12px;
+  animation:fadeUp .4s ease;display:none;
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* ═══════════════════════════════════════════
+   MAP / LOCATION SECTION
+═══════════════════════════════════════════ */
+.location {
+  padding: 0 0 clamp(64px,10vw,120px);
+  background: var(--g50);
+}
+
+.location-inner {
+  background: #fff;
+  border-radius: var(--r-xl);
+  border: 1px solid var(--g200);
+  overflow: hidden;
+  box-shadow: var(--sh-md);
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+}
+
+.location-info {
+  padding: clamp(28px,4vw,48px);
+}
+
+.location-info h3 {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  color: var(--slate900);
+  margin-bottom: 8px;
+  line-height: 1.2;
+}
+
+.location-info > p {
+  color: var(--slate600);
+  font-size: .9rem;
+  margin-bottom: 28px;
+  line-height: 1.7;
+}
+
+.loc-details {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.loc-item {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.loc-icon {
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+  background: var(--g100);
+  border-radius: var(--r-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+}
+
+.loc-item strong {
+  display: block;
+  font-size: .8rem;
+  color: var(--slate600);
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+.loc-item span {
+  font-size: .88rem;
+  color: var(--slate900);
+  font-weight: 500;
+}
+
+/* ================= MAP AREA ================= */
+
+.location-map {
+  position: relative;
+  min-height: 400px;
+  background: linear-gradient(135deg, var(--g100), var(--g200));
+  overflow: hidden;
+}
+
+/* Grid overlay */
+.location-map::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(22,163,74,.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(22,163,74,.1) 1px, transparent 1px);
+  background-size: 32px 32px;
+  pointer-events: none; /* Haritayı bloklamasın */
+}
+
+/* Iframe */
+.location-map iframe {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
+
+/* ═══════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════ */
+.footer{background:var(--g950);color:rgba(255,255,255,.7);padding:clamp(40px,6vw,64px) 0 32px}
+.footer-top{
+  display:grid;grid-template-columns:2fr 1fr 1fr;
+  gap:clamp(24px,4vw,60px);
+  padding-bottom:clamp(32px,5vw,48px);
+  border-bottom:1px solid rgba(255,255,255,.08);
+  margin-bottom:28px;
+}
+.footer-brand{}
+.footer-logo{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.footer-logo-mark{
+  width:36px;height:36px;background:rgba(255,255,255,.1);
+  border:1px solid rgba(255,255,255,.15);border-radius:9px;
+  display:flex;align-items:center;justify-content:center;
+}
+.footer-logo-text strong{display:block;color:#fff;font-weight:700;font-size:.9rem}
+.footer-logo-text small{font-size:.65rem;opacity:.55;letter-spacing:.06em}
+.footer-brand p{font-size:.84rem;line-height:1.7;max-width:280px}
+.footer-col h4{color:#fff;font-weight:700;font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;margin-bottom:16px}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+.footer-col ul li a{font-size:.84rem;opacity:.65;transition:opacity .2s}
+.footer-col ul li a:hover{opacity:1}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.footer-bottom p{font-size:.78rem;opacity:.5}
+.tubitak-badge{
+  display:flex;align-items:center;gap:8px;
+  padding:6px 14px;background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.1);border-radius:30px;
+  font-size:.73rem;font-weight:600;color:rgba(255,255,255,.6);
+}
+.tubitak-badge::before{content:'🇹🇷';font-size:.9rem}
+
+/* WhatsApp floating button */
+.wa-float{
+  position:fixed;bottom:28px;right:28px;z-index:900;
+  width:56px;height:56px;
+  background:#25d366;color:#fff;
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 20px rgba(37,211,102,.5);
+  transition:all .3s;
+  text-decoration:none;
+}
+.wa-float:hover{transform:scale(1.12);box-shadow:0 8px 28px rgba(37,211,102,.6)}
+.wa-float-pulse{
+  position:absolute;inset:-4px;border-radius:50%;
+  background:rgba(37,211,102,.3);
+  animation:waPulse 2.5s ease-out infinite;
+}
+@keyframes waPulse{0%{transform:scale(1);opacity:.6}100%{transform:scale(1.6);opacity:0}}
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE — TABLET (≤960px)
+═══════════════════════════════════════════ */
+@media(max-width:960px){
+  .hero-inner{grid-template-columns:1fr;text-align:center;gap:48px}
+  .hero-kicker,.hero-desc,.hero-meta-row{margin-left:auto;margin-right:auto}
+  .hero-desc{max-width:600px}
+  .hero-meta-row{justify-content:center;max-width:480px}
+  .hero-ctas{justify-content:center}
+  .hero-right{height:340px;width:100%;max-width:460px;margin:0 auto}
+  .card-main{width:220px}
+
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+  .stat-item:nth-child(2){border-right:none}
+  .stat-item:nth-child(3){border-right:1px solid rgba(255,255,255,.1)}
+  .stat-item:nth-child(3),.stat-item:nth-child(4){border-top:1px solid rgba(255,255,255,.1)}
+
+  .about-grid{grid-template-columns:1fr}
+  .impact-banner{grid-template-columns:1fr}
+  .impact-stats{flex-direction:row;gap:12px}
+  .i-stat{flex:1}
+
+  .acts-grid{grid-template-columns:1fr}
+
+  .team-grid{grid-template-columns:1fr 1fr}
+
+  .contact-grid{grid-template-columns:1fr}
+  .location-inner{grid-template-columns:1fr}
+  .location-map{min-height:240px}
+
+  .footer-top{grid-template-columns:1fr 1fr}
+  .footer-brand{grid-column:span 2}
+}
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE — MOBILE (≤640px)
+═══════════════════════════════════════════ */
+@media(max-width:640px){
+  .nav-links,.nav-cta{display:none}
+  .hamburger{display:flex}
+
+  .hero{padding-top:calc(var(--nav-h) + 32px)}
+  .hero-right{height:260px}
+  .card-main{width:190px;padding:22px 18px}
+  .cf1,.cf2,.cf3{display:none}
+  .sp1{top:8px;left:8px}
+  .sp2{bottom:16px;right:8px}
+
+  .stats-grid{grid-template-columns:1fr 1fr}
+  .stat-item{border-right:none !important;border-top:none !important;padding:16px 12px}
+  .stat-item:nth-child(odd){border-right:1px solid rgba(255,255,255,.1) !important}
+
+  .about-grid{grid-template-columns:1fr}
+  .impact-banner{padding:28px 24px}
+  .impact-banner::after{display:none}
+  .impact-stats{flex-direction:row;gap:10px}
+
+  .team-grid{grid-template-columns:1fr}
+
+  .form-row{grid-template-columns:1fr}
+
+  .footer-top{grid-template-columns:1fr}
+  .footer-brand{grid-column:span 1}
+  .footer-bottom{flex-direction:column;align-items:flex-start;gap:8px}
+
+  .wa-float{bottom:20px;right:20px;width:50px;height:50px}
+}
+</style>
 </head>
 <body>
-  <app-root></app-root>
+
+<!-- ════════════════════ NAVBAR ════════════════════ -->
+<nav class="navbar" id="navbar">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <div class="logo-mark">
+        <svg width="22" height="22" viewBox="0 0 32 32" fill="none">
+          <circle cx="16" cy="16" r="13" stroke="white" stroke-width="2"/>
+          <path d="M10 16L14 20L22 12" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="logo-text">
+        <span class="logo-primary">TÜBİTAK 2237/A</span>
+        <span class="logo-sub">Yaşam Boyu Destek</span>
+      </div>
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="#hero"       class="nav-link active">Ana Sayfa</a></li>
+      <li><a href="#about"      class="nav-link">Proje</a></li>
+      <li><a href="#activities" class="nav-link">Faaliyetler</a></li>
+      <li><a href="#team"       class="nav-link">Ekip</a></li>
+      <li><a href="#faq"        class="nav-link">SSS</a></li>
+      <li><a href="#contact"    class="nav-link">İletişim</a></li>
+    </ul>
+
+    <div class="nav-cta">
+      <a href="https://wa.me/905060251812?text=2237/A%20Projesi%20hakkında%20bilgi%20almak%20istiyorum." class="btn-wa" target="_blank" rel="noopener">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+        WhatsApp
+      </a>
+      <a href="#contact" class="btn-apply">Başvur</a>
+    </div>
+
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menü">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile Drawer -->
+<div class="mobile-drawer" id="mobileDrawer">
+  <a href="#hero"       class="mobile-nav-link" onclick="closeMenu()">🏠 Ana Sayfa</a>
+  <a href="#about"      class="mobile-nav-link" onclick="closeMenu()">📋 Proje Hakkında</a>
+  <a href="#activities" class="mobile-nav-link" onclick="closeMenu()">📅 Faaliyetler</a>
+  <a href="#team"       class="mobile-nav-link" onclick="closeMenu()">👥 Ekip</a>
+  <a href="#faq"        class="mobile-nav-link" onclick="closeMenu()">❓ SSS</a>
+  <a href="#contact"    class="mobile-nav-link" onclick="closeMenu()">📬 İletişim</a>
+  <div class="mobile-drawer-ctas">
+    <a href="https://wa.me/905060251812" class="btn-wa-mobile" target="_blank">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+      WhatsApp ile İletişim
+    </a>
+    <a href="#contact" class="btn-apply-mobile" onclick="closeMenu()">Başvuru Formu</a>
+  </div>
+</div>
+
+<!-- ════════════════════ HERO ════════════════════ -->
+<section class="hero" id="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <!-- Left -->
+      <div class="hero-left">
+        <div class="hero-kicker">
+          <span class="kicker-dot"></span>
+          TÜBİTAK 2237/A · Aktif Proje
+        </div>
+        <h1 class="hero-title">
+          Yaşam Boyu<br>
+          <em>Öğrenme ve</em><br>
+          Destek Projesi
+        </h1>
+        <p class="hero-desc">
+          Bireylerin bilişsel gelişimini desteklemek, eğitime erişimi demokratikleştirmek ve toplumsal refaha bilimsel katkı sağlamak amacıyla TÜBİTAK desteğiyle yürütülen ulusal proje.
+        </p>
+
+        <div class="hero-meta-row">
+          <div class="hero-meta-item">
+            <span class="hero-meta-label">Yürütücü</span>
+            <span class="hero-meta-value">Çağatay Yöndem</span>
+          </div>
+          <div class="hero-meta-sep"></div>
+          <div class="hero-meta-item">
+            <span class="hero-meta-label">Program</span>
+            <span class="hero-meta-value">TÜBİTAK 2237/A</span>
+          </div>
+          <div class="hero-meta-sep"></div>
+          <div class="hero-meta-item">
+            <span class="hero-meta-label">Durum</span>
+            <div class="meta-live"><span class="meta-live-dot"></span>Devam Ediyor</div>
+          </div>
+        </div>
+
+        <div class="hero-ctas">
+          <a href="https://wa.me/905060251812?text=Merhaba,%202237/A%20projesi%20hakkında%20bilgi%20almak%20istiyorum." class="cta-wa" target="_blank" rel="noopener">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+            WhatsApp İstek Hattı
+          </a>
+          <a href="#about" class="btn-outline">Projeyi Keşfet →</a>
+        </div>
+      </div>
+
+      <!-- Right visual -->
+      <div class="hero-right">
+        <div class="hero-card card-main">
+          <div class="card-main-icon">🎓</div>
+          <h3>Yaşam Boyu Öğrenme</h3>
+          <p>Her yaşta, her koşulda eğitime erişim hakkı</p>
+        </div>
+        <div class="hero-card card-float cf1">
+          <span style="font-size:1.3rem">🔬</span>
+          <span>Bilimsel Araştırma</span>
+        </div>
+        <div class="hero-card card-float cf2">
+          <span style="font-size:1.3rem">🤝</span>
+          <span>Toplumsal Etki</span>
+        </div>
+        <div class="hero-card card-float cf3">
+          <span style="font-size:1.3rem">📊</span>
+          <span>Ölçülebilir Sonuç</span>
+        </div>
+        <div class="stat-pill sp1">
+          <span class="num">2237</span>
+          <span class="lbl">Program No</span>
+        </div>
+        <div class="stat-pill sp2">
+          <span class="num">100%</span>
+          <span class="lbl">TÜBİTAK</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ STATS ════════════════════ -->
+<div class="stats-strip">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-item">
+        <span class="stat-num" data-target="500">0</span>
+        <span class="stat-lbl">Hedef Katılımcı</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num" data-target="12">0</span>
+        <span class="stat-lbl">Planlanan Etkinlik</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num" data-suffix=" ay" data-target="18">0</span>
+        <span class="stat-lbl">Proje Süresi</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">2237/A</span>
+        <span class="stat-lbl">TÜBİTAK Programı</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════ ABOUT ════════════════════ -->
+<section class="about" id="about">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-tag">Proje Hakkında</span>
+      <h2>Neden Bu Proje Önemli?</h2>
+      <p>Türkiye'nin sürdürülebilir kalkınma hedefleri doğrultusunda, bireylerin yaşam boyu öğrenme kapasitesini geliştirmek kritik bir öneme sahiptir.</p>
+    </div>
+
+    <div class="about-grid">
+      <div class="about-card">
+        <div class="about-icon">📚</div>
+        <h3>Eğitim Erişiminin Demokratikleşmesi</h3>
+        <p>Farklı yaş, sosyoekonomik düzey ve coğrafi konumdaki bireylerin nitelikli eğitime eşit erişimini sağlayan mekanizmalar geliştiriyoruz.</p>
+      </div>
+      <div class="about-card">
+        <div class="about-icon">🧠</div>
+        <h3>Bilişsel Gelişim ve Nöroplastisite</h3>
+        <p>Beynin yaşam boyu değişme kapasitesine dayanan bilimsel müdahaleler tasarlayarak bireylerin öğrenme etkinliğini artırıyoruz.</p>
+      </div>
+      <div class="about-card">
+        <div class="about-icon">🌱</div>
+        <h3>Sürdürülebilir Toplumsal Etki</h3>
+        <p>Bireysel gelişimden toplumsal dönüşüme uzanan ölçeklenebilir bir model kurarak uzun vadeli, ölçülebilir etkiler yaratıyoruz.</p>
+      </div>
+      <div class="about-card">
+        <div class="about-icon">🔗</div>
+        <h3>Disiplinlerarası İşbirliği</h3>
+        <p>Eğitim bilimleri, psikoloji ve veri analitiği alanlarını bir araya getiren bütünleşik bir araştırma yaklaşımı benimsiyoruz.</p>
+      </div>
+    </div>
+
+    <div class="impact-banner">
+      <div class="impact-text">
+        <h3>Projenin Bilimsel Çerçevesi</h3>
+        <p>TÜBİTAK 2237/A programı kapsamındaki bu proje; seminerler, çalıştaylar, alan araştırmaları ve veri odaklı değerlendirme süreçlerini kapsayan bütüncül bir yapıya sahiptir. Türkiye'nin YÖK ve MEB politikalarıyla uyumlu bu girişim, ulusal eğitim vizyonuna somut katkılar sunmayı hedeflemektedir.</p>
+        <a href="#activities" class="btn-primary">Faaliyet Planına Bak →</a>
+      </div>
+      <div class="impact-stats">
+        <div class="i-stat">
+          <span class="i-stat-num">∞</span>
+          <span class="i-stat-lbl">Yaşam Boyu</span>
+        </div>
+        <div class="i-stat">
+          <span class="i-stat-num">🇹🇷</span>
+          <span class="i-stat-lbl">Ulusal Proje</span>
+        </div>
+        <div class="i-stat">
+          <span class="i-stat-num">A+</span>
+          <span class="i-stat-lbl">Bilimsel Standart</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ ACTIVITIES ════════════════════ -->
+<section class="activities" id="activities">
+  <div class="container">
+    <div class="sec-head light">
+      <span class="sec-tag light">Faaliyet Planı</span>
+      <h2>Proje Etkinlikleri</h2>
+      <p>Bilimsel temelli, katılımcı odaklı ve ölçülebilir çıktılar sunan faaliyet programımız</p>
+    </div>
+
+    <div class="acts-grid">
+      <div class="act-card">
+        <span class="act-step">01</span>
+        <span class="act-tag">Açılış Semineri</span>
+        <h4>Proje Tanıtım ve Paydaş Buluşması</h4>
+        <p>Projenin hedefleri, bilimsel altyapısı ve beklenen çıktıların tüm paydaşlarla paylaşıldığı açılış etkinliği. Akademisyenler, uygulayıcılar ve katılımcılar bir araya geliyor.</p>
+        <span class="act-date">Yakında Duyurulacak</span>
+      </div>
+      <div class="act-card">
+        <span class="act-step">02</span>
+        <span class="act-tag">Çalıştay Serisi</span>
+        <h4>Uygulamalı Öğrenme Çalıştayları</h4>
+        <p>Katılımcıların aktif rol üstlendiği, problem çözme odaklı interaktif çalıştaylar. Her çalıştay bağımsız bir öğrenme modülü olarak tasarlandı.</p>
+        <span class="act-date">Yakında Duyurulacak</span>
+      </div>
+      <div class="act-card">
+        <span class="act-step">03</span>
+        <span class="act-tag">Alan Araştırması</span>
+        <h4>Veri Toplama ve Katılımcı Değerlendirmesi</h4>
+        <p>Anket, mülakat ve gözlem yöntemleriyle yapılandırılmış veri toplama süreci. Etik kurul onaylı protokollerle yürütülüyor.</p>
+        <span class="act-date">Yakında Duyurulacak</span>
+      </div>
+      <div class="act-card">
+        <span class="act-step">04</span>
+        <span class="act-tag">Analiz & Raporlama</span>
+        <h4>Bilimsel Analiz ve TÜBİTAK Raporlaması</h4>
+        <p>Toplanan verilerinin istatistiksel analizi, bulguların bilimsel makalelere dönüştürülmesi ve TÜBİTAK'a kapsamlı proje raporunun sunulması.</p>
+        <span class="act-date">Yakında Duyurulacak</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ TEAM ════════════════════ -->
+<section class="team" id="team">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-tag">Ekip</span>
+      <h2>Proje Ekibi</h2>
+      <p>Bu projeyi bilimsel titizlikle yürüten uzmanlar</p>
+    </div>
+
+    <div class="team-grid">
+      <div class="team-card lead">
+        <div class="team-avatar-wrap">
+          <div class="team-avatar">ÇY</div>
+          <span class="lead-badge">Yürütücü</span>
+        </div>
+        <div class="team-name">Çağatay Yöndem</div>
+        <span class="team-role">Proje Yürütücüsü</span>
+        <p class="team-bio">TÜBİTAK 2237/A Yaşam Boyu Destek Projesi'nin kurucusu ve yürütücüsü. Projenin bilimsel tasarımı, koordinasyonu ve raporlamasından sorumlu.</p>
+      </div>
+
+      <div class="team-card team-add">
+        <div class="team-add-icon">+</div>
+        <p>Araştırmacı Ekip<br><small style="opacity:.6">Yakında eklenecek</small></p>
+      </div>
+
+      <div class="team-card team-add">
+        <div class="team-add-icon">+</div>
+        <p>Danışman<br><small style="opacity:.6">Yakında eklenecek</small></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ FAQ ════════════════════ -->
+<section class="faq" id="faq">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-tag">SSS</span>
+      <h2>Sıkça Sorulan Sorular</h2>
+      <p>Proje hakkında merak ettiğiniz her şey</p>
+    </div>
+
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          TÜBİTAK 2237/A programı nedir?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">TÜBİTAK 2237/A, bilim insanlarının ve araştırmacıların öncülük ettiği bilimsel etkinlikleri (seminer, çalıştay, okul vb.) destekleyen bir programdır. Bu program kapsamında desteklenen projeler, akademik bilginin topluma aktarılmasını ve yaşam boyu öğrenme kültürünün yaygınlaştırılmasını hedefler.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Projeye kimler katılabilir?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">Proje, yaşam boyu öğrenme ilkesine inanan farklı yaş ve kesimlerden bireyler için tasarlanmıştır. Öğrenciler, akademisyenler, profesyoneller ve meraklı bireyler başvurabilir. Katılım kriterleri etkinlik bazında duyurulacaktır.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Etkinliklere katılım ücretsiz mi?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">TÜBİTAK desteğiyle yürütülen bu projenin etkinlikleri katılımcılara ücretsiz sunulmaktadır. Proje kapsamındaki seminer ve çalıştaylara katılmak için ön kayıt yaptırmanız yeterlidir.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Etkinlik takvimi ne zaman açıklanacak?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">Etkinlik takvimine ilişkin duyurular bu web sitesi ve WhatsApp istek hattı üzerinden paylaşılacaktır. Duyuru almak için iletişim formunu doldurabilir veya WhatsApp hattımıza mesaj gönderebilirsiniz.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Proje sonunda katılım belgesi verilecek mi?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">Etkinliklere katılım sağlayan bireyler için TÜBİTAK onaylı katılım belgesi düzenlenmesi planlanmaktadır. Detaylar etkinlik başvuru sürecinde paylaşılacaktır.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ CONTACT ════════════════════ -->
+<section class="contact" id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <!-- Left -->
+      <div class="contact-info">
+        <span class="sec-tag">İletişim</span>
+        <h2>Bizimle İletişime Geçin</h2>
+        <p>Proje hakkında soru sormak, başvurmak veya iş birliği teklif etmek için aşağıdaki kanalları kullanabilirsiniz.</p>
+
+        <a href="https://wa.me/905060251812?text=Merhaba,%202237/A%20projesi%20hakkında%20bilgi%20almak%20istiyorum." class="wa-banner" target="_blank" rel="noopener">
+          <div class="wa-banner-icon">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+          </div>
+          <div class="wa-banner-text">
+            <strong>WhatsApp İstek Hattı</strong>
+            <span>Hızlı yanıt için doğrudan yazın</span>
+          </div>
+          <span class="wa-banner-arrow">→</span>
+        </a>
+
+        <div class="contact-channels">
+          <div class="channel">
+            <div class="channel-icon">📧</div>
+            <div>
+              <span class="channel-label">E-Posta</span>
+              <span class="channel-value">cagatay.yondem@universite.edu.tr</span>
+            </div>
+          </div>
+          <div class="channel">
+            <div class="channel-icon">🏛️</div>
+            <div>
+              <span class="channel-label">Kurum</span>
+              <span class="channel-value">TÜBİTAK Destekli Proje Birimi</span>
+            </div>
+          </div>
+          <div class="channel">
+            <div class="channel-icon">📋</div>
+            <div>
+              <span class="channel-label">Program Kodu</span>
+              <span class="channel-value">TÜBİTAK 2237/A — Yaşam Boyu Destek</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Form -->
+      <div class="contact-form-wrap">
+        <h3>Başvuru ve Bilgi Formu</h3>
+        <p>Aşağıdaki formu doldurun, en geç 2 iş günü içinde dönüş yapalım.</p>
+
+        <form onsubmit="handleSubmit(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Ad</label>
+              <input type="text" placeholder="Adınız" required/>
+            </div>
+            <div class="form-group">
+              <label>Soyad</label>
+              <input type="text" placeholder="Soyadınız" required/>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>E-posta</label>
+            <input type="email" placeholder="ornek@mail.com" required/>
+          </div>
+          <div class="form-group">
+            <label>Telefon (isteğe bağlı)</label>
+            <input type="tel" placeholder="+90 5XX XXX XX XX"/>
+          </div>
+          <div class="form-group">
+            <label>Konu</label>
+            <select>
+              <option value="">Seçiniz...</option>
+              <option>Proje Hakkında Bilgi</option>
+              <option>Etkinliklere Katılım Başvurusu</option>
+              <option>Akademik İşbirliği Teklifi</option>
+              <option>Medya / Basın Talebi</option>
+              <option>Diğer</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Mesajınız</label>
+            <textarea placeholder="Mesajınızı buraya yazın..." rows="4" required></textarea>
+          </div>
+          <button type="submit" class="btn-primary form-submit">
+            Gönder →
+          </button>
+          <p class="form-note">📌 Bilgileriniz yalnızca proje iletişimi amacıyla kullanılır.</p>
+          <div class="success-box" id="successBox">✅ Mesajınız alındı! En geç 2 iş günü içinde dönüş yapacağız.</div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ LOCATION ════════════════════ -->
+<section class="location" id="location">
+  <div class="container">
+    <div class="location-inner">
+      <div class="location-info">
+        <span class="sec-tag" style="margin-bottom:16px;display:inline-flex">Konum</span>
+        <h3>Proje Yürütme Merkezi</h3>
+        <p>Proje etkinlikleri aşağıdaki adreste ve gerektiğinde çevrimiçi platformlarda gerçekleştirilecektir.</p>
+        <div class="loc-details">
+          <div class="loc-item">
+            <div class="loc-icon">🏛️</div>
+            <div>
+              <strong>Kurum</strong>
+              <span>Üniversite / Araştırma Merkezi Adı</span>
+            </div>
+          </div>
+          <div class="loc-item">
+            <div class="loc-icon">📍</div>
+            <div>
+              <strong>Adres</strong>
+              <span>Adres bilgisi yakında eklenecek</span>
+            </div>
+          </div>
+          <div class="loc-item">
+            <div class="loc-icon">🕐</div>
+            <div>
+              <strong>İletişim Saatleri</strong>
+              <span>Hafta içi 09:00 – 17:00</span>
+            </div>
+          </div>
+          <div class="loc-item">
+            <div class="loc-icon">💻</div>
+            <div>
+              <strong>Çevrimiçi Katılım</strong>
+              <span>Uzaktan katılım seçeneği mevcut</span>
+            </div>
+          </div>
+        </div>
+      </div>
+<div class="location-map">
+  <iframe 
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3065.5813161143237!2d30.493412331213378!3d39.79395043054358!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14cc1500631d239d%3A0xd1fc285467888cb4!2sDilkom%20-%20Dil%20ve%20Konu%C5%9Fma%20Bozukluklar%C4%B1%20E%C4%9Fitim%20Uygulama%20ve%20Ara%C5%9Ft%C4%B1rma%20Merkezi!5e0!3m2!1str!2str!4v1771344836854!5m2!1str!2str"
+    width="100%"
+    height="400"
+    style="border:0;"
+    allowfullscreen=""
+    loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade">
+  </iframe>
+</div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ FOOTER ════════════════════ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <div class="footer-logo-mark">
+            <svg width="20" height="20" viewBox="0 0 32 32" fill="none">
+              <circle cx="16" cy="16" r="13" stroke="white" stroke-width="2"/>
+              <path d="M10 16L14 20L22 12" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="footer-logo-text">
+            <strong>TÜBİTAK 2237/A</strong>
+            <small>Yaşam Boyu Destek Projesi</small>
+          </div>
+        </div>
+        <p>Bilgiye erişimi demokratikleştiren, bireylerin yaşam boyu gelişimini destekleyen ve toplumsal refaha katkı sağlayan ulusal bir TÜBİTAK projesi.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Hızlı Bağlantılar</h4>
+        <ul>
+          <li><a href="#hero">Ana Sayfa</a></li>
+          <li><a href="#about">Proje Hakkında</a></li>
+          <li><a href="#activities">Faaliyetler</a></li>
+          <li><a href="#team">Ekip</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>İletişim</h4>
+        <ul>
+          <li><a href="#faq">SSS</a></li>
+          <li><a href="#contact">Başvuru Formu</a></li>
+          <li><a href="https://wa.me/90XXXXXXXXXX" target="_blank">WhatsApp Hattı</a></li>
+          <li><a href="#location">Konum</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2025 Çağatay Yöndem · TÜBİTAK 2237/A Yaşam Boyu Destek Projesi</p>
+      <div class="tubitak-badge">TÜBİTAK Destekli Proje</div>
+    </div>
+  </div>
+</footer>
+
+<!-- ════ WhatsApp Floating Button ════ -->
+<a href="https://wa.me/905060251812?text=Merhaba,%202237/A%20projesi%20hakkında%20bilgi%20almak%20istiyorum." class="wa-float" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <div class="wa-float-pulse"></div>
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+</a>
+
+<script>
+// ── Navbar scroll effect
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 40);
+
+  // Active nav link
+  const sections = document.querySelectorAll('section[id]');
+  const links = document.querySelectorAll('.nav-link');
+  let current = '';
+  sections.forEach(s => { if(window.scrollY >= s.offsetTop - 100) current = s.id; });
+  links.forEach(l => {
+    l.classList.remove('active');
+    if(l.getAttribute('href') === '#'+current) l.classList.add('active');
+  });
+});
+
+// ── Mobile menu
+function toggleMenu() {
+  const h = document.getElementById('hamburger');
+  const d = document.getElementById('mobileDrawer');
+  h.classList.toggle('open');
+  d.classList.toggle('open');
+  document.body.style.overflow = d.classList.contains('open') ? 'hidden' : '';
+}
+function closeMenu() {
+  document.getElementById('hamburger').classList.remove('open');
+  document.getElementById('mobileDrawer').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// ── FAQ accordion
+function toggleFaq(btn) {
+  const item = btn.closest('.faq-item');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+  if(!isOpen) item.classList.add('open');
+}
+
+// ── Form submit
+function handleSubmit(e) {
+  e.preventDefault();
+  const box = document.getElementById('successBox');
+  box.style.display = 'block';
+  e.target.reset();
+  setTimeout(() => { box.style.display = 'none'; }, 5000);
+}
+
+// ── Count-up animation
+function animateCount(el) {
+  const target = parseInt(el.dataset.target);
+  const suffix = el.dataset.suffix || '';
+  const duration = 1800;
+  const step = target / (duration / 16);
+  let current = 0;
+  const timer = setInterval(() => {
+    current = Math.min(current + step, target);
+    el.textContent = Math.floor(current) + suffix;
+    if(current >= target) clearInterval(timer);
+  }, 16);
+}
+
+const statsObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting) {
+      entry.target.querySelectorAll('[data-target]').forEach(el => animateCount(el));
+      statsObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.4 });
+
+const strip = document.querySelector('.stats-strip');
+if(strip) statsObserver.observe(strip);
+</script>
 </body>
 </html>
